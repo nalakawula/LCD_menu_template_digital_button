@@ -1,0 +1,72 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/cores/arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/variants/eightanaloginputs"
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
+    "Include": "RBD_Timer.h",
+    "Includepath": "/home/sumarsono/Arduino/libraries/RBD_Timer/src"
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
+    "Include": "RBD_Button.h",
+    "Includepath": "/home/sumarsono/Arduino/libraries/RBD_Button/src"
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
+    "Include": "LiquidCrystal_I2C.h",
+    "Includepath": "/home/sumarsono/Arduino/libraries/LiquidCrystal_I2C"
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
+    "Include": "Wire.h",
+    "Includepath": "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/libraries/Wire/src"
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
+    "Include": "LiquidCrystal.h",
+    "Includepath": "/home/sumarsono/opt/arduino-1.8.4/libraries/LiquidCrystal/src"
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/libraries/RBD_Timer/src/RBD_Timer.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/libraries/RBD_Button/src/RBD_Button.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/sumarsono/Arduino/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/libraries/Wire/src/Wire.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/libraries/Wire/src/utility/twi.c",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/sumarsono/opt/arduino-1.8.4/libraries/LiquidCrystal/src/LiquidCrystal.cpp",
+    "Include": "",
+    "Includepath": ""
+  }
+]

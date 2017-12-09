@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/cores/arduino",
+                "/home/sumarsono/Arduino/libraries"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "path": [
+                    "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/cores/arduino",
+                    "/home/sumarsono/Arduino/libraries"
+                ]
+            },
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 3
+}

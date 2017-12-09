@@ -1,0 +1,10 @@
+{
+  "builtInLibrariesFolders": "/home/sumarsono/opt/arduino-1.8.4/libraries",
+  "customBuildProperties": "build.path=/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode,build.warn_data_percentage=75,runtime.tools.avrdude.path=/home/sumarsono/opt/arduino-1.8.4/hardware/tools/avr,runtime.tools.avr-gcc.path=/home/sumarsono/opt/arduino-1.8.4/hardware/tools/avr,runtime.tools.arduinoOTA.path=/home/sumarsono/opt/arduino-1.8.4/hardware/tools/avr",
+  "fqbn": "arduino:avr:nano:cpu=atmega328",
+  "hardwareFolders": "/home/sumarsono/opt/arduino-1.8.4/hardware",
+  "otherLibrariesFolders": "/home/sumarsono/Arduino/libraries",
+  "runtime.ide.version": "10804",
+  "sketchLocation": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino",
+  "toolsFolders": "/home/sumarsono/opt/arduino-1.8.4/tools-builder,/home/sumarsono/opt/arduino-1.8.4/hardware/tools/avr"
+}
