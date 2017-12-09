@@ -1,7 +1,9 @@
-#include <RBD_Timer.h>
-#include <RBD_Button.h>
-#include <LiquidCrystal_I2C.h>
-#include <Wire.h>
+# 1 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+# 1 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+# 2 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino" 2
+# 3 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino" 2
+# 4 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino" 2
+# 5 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino" 2
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -21,7 +23,7 @@ RBD::Button kiri(8);
 
 // Menu control variables
 int menuPage = 0;
-int maxMenuPages = round(((sizeof(menuItems) / sizeof(String)) / 2) + .5);
+int maxMenuPages = ((((sizeof(menuItems) / sizeof(String)) / 2) + .5)>=0?(long)((((sizeof(menuItems) / sizeof(String)) / 2) + .5)+0.5):(long)((((sizeof(menuItems) / sizeof(String)) / 2) + .5)-0.5));
 int cursorPosition = 0;
 
 // Creates 3 custom characters for the menu display
@@ -33,7 +35,7 @@ byte downArrow[8] = {
   0b00100, //   *
   0b10101, // * * *
   0b01110, //  ***
-  0b00100  //   *
+  0b00100 //   *
 };
 
 byte upArrow[8] = {
@@ -44,18 +46,18 @@ byte upArrow[8] = {
   0b00100, //   *
   0b00100, //   *
   0b00100, //   *
-  0b00100  //   *
+  0b00100 //   *
 };
 
 byte menuCursor[8] = {
-  B01000, //  *
-  B00100, //   *
-  B00010, //    *
-  B00001, //     *
-  B00010, //    *
-  B00100, //   *
-  B01000, //  *
-  B00000  //
+  8, //  *
+  4, //   *
+  2, //    *
+  1, //     *
+  2, //    *
+  4, //   *
+  8, //  *
+  0 //
 };
 
 
@@ -106,7 +108,7 @@ void mainMenuDraw() {
 
 // When called, this function will erase the current cursor and redraw it based on the cursorPosition and menuPage variables.
 void drawCursor() {
-  for (int x = 0; x < 2; x++) {     // Erases current cursor
+  for (int x = 0; x < 2; x++) { // Erases current cursor
     lcd.setCursor(0, x);
     lcd.print(" ");
   }
@@ -114,21 +116,21 @@ void drawCursor() {
   // The menu is set up to be progressive (menuPage 0 = Item 1 & Item 2, menuPage 1 = Item 2 & Item 3, menuPage 2 = Item 3 & Item 4), so
   // in order to determine where the cursor should be you need to see if you are at an odd or even menu page and an odd or even cursor position.
   if (menuPage % 2 == 0) {
-    if (cursorPosition % 2 == 0) {  // If the menu page is even and the cursor position is even that means the cursor should be on line 1
+    if (cursorPosition % 2 == 0) { // If the menu page is even and the cursor position is even that means the cursor should be on line 1
       lcd.setCursor(0, 0);
       lcd.write(byte(0));
     }
-    if (cursorPosition % 2 != 0) {  // If the menu page is even and the cursor position is odd that means the cursor should be on line 2
+    if (cursorPosition % 2 != 0) { // If the menu page is even and the cursor position is odd that means the cursor should be on line 2
       lcd.setCursor(0, 1);
       lcd.write(byte(0));
     }
   }
   if (menuPage % 2 != 0) {
-    if (cursorPosition % 2 == 0) {  // If the menu page is odd and the cursor position is even that means the cursor should be on line 2
+    if (cursorPosition % 2 == 0) { // If the menu page is odd and the cursor position is even that means the cursor should be on line 2
       lcd.setCursor(0, 1);
       lcd.write(byte(0));
     }
-    if (cursorPosition % 2 != 0) {  // If the menu page is odd and the cursor position is odd that means the cursor should be on line 1
+    if (cursorPosition % 2 != 0) { // If the menu page is odd and the cursor position is odd that means the cursor should be on line 1
       lcd.setCursor(0, 0);
       lcd.write(byte(0));
     }
@@ -149,7 +151,7 @@ void operateMainMenu() {
     switch (button) {
       case 0: // When button returns as 0 there is no action taken
         break;
-      case 1:  // This case will execute if the "forward" button is pressed
+      case 1: // This case will execute if the "forward" button is pressed
         button = 0;
         switch (cursorPosition) { // The case that is selected here is dependent on which menu page you are on and where the cursor is.
           case 0:
@@ -191,20 +193,20 @@ void operateMainMenu() {
         button = 0;
         if (menuPage == 0) {
           cursorPosition = cursorPosition - 1;
-          cursorPosition = constrain(cursorPosition, 0, ((sizeof(menuItems) / sizeof(String)) - 1));
+          cursorPosition = ((cursorPosition)<(0)?(0):((cursorPosition)>(((sizeof(menuItems) / sizeof(String)) - 1))?(((sizeof(menuItems) / sizeof(String)) - 1)):(cursorPosition)));
         }
         if (menuPage % 2 == 0 and cursorPosition % 2 == 0) {
           menuPage = menuPage - 1;
-          menuPage = constrain(menuPage, 0, maxMenuPages);
+          menuPage = ((menuPage)<(0)?(0):((menuPage)>(maxMenuPages)?(maxMenuPages):(menuPage)));
         }
 
         if (menuPage % 2 != 0 and cursorPosition % 2 != 0) {
           menuPage = menuPage - 1;
-          menuPage = constrain(menuPage, 0, maxMenuPages);
+          menuPage = ((menuPage)<(0)?(0):((menuPage)>(maxMenuPages)?(maxMenuPages):(menuPage)));
         }
 
         cursorPosition = cursorPosition - 1;
-        cursorPosition = constrain(cursorPosition, 0, ((sizeof(menuItems) / sizeof(String)) - 1));
+        cursorPosition = ((cursorPosition)<(0)?(0):((cursorPosition)>(((sizeof(menuItems) / sizeof(String)) - 1))?(((sizeof(menuItems) / sizeof(String)) - 1)):(cursorPosition)));
 
         mainMenuDraw();
         drawCursor();
@@ -214,16 +216,16 @@ void operateMainMenu() {
         button = 0;
         if (menuPage % 2 == 0 and cursorPosition % 2 != 0) {
           menuPage = menuPage + 1;
-          menuPage = constrain(menuPage, 0, maxMenuPages);
+          menuPage = ((menuPage)<(0)?(0):((menuPage)>(maxMenuPages)?(maxMenuPages):(menuPage)));
         }
 
         if (menuPage % 2 != 0 and cursorPosition % 2 == 0) {
           menuPage = menuPage + 1;
-          menuPage = constrain(menuPage, 0, maxMenuPages);
+          menuPage = ((menuPage)<(0)?(0):((menuPage)>(maxMenuPages)?(maxMenuPages):(menuPage)));
         }
 
         cursorPosition = cursorPosition + 1;
-        cursorPosition = constrain(cursorPosition, 0, ((sizeof(menuItems) / sizeof(String)) - 1));
+        cursorPosition = ((cursorPosition)<(0)?(0):((cursorPosition)>(((sizeof(menuItems) / sizeof(String)) - 1))?(((sizeof(menuItems) / sizeof(String)) - 1)):(cursorPosition)));
         mainMenuDraw();
         drawCursor();
         activeButton = 1;
@@ -288,9 +290,9 @@ void menuItem1() { // Function executes when you select the 1st item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -312,9 +314,9 @@ void menuItem2() { // Function executes when you select the 2nd item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -336,9 +338,9 @@ void menuItem3() { // Function executes when you select the 3rd item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -360,9 +362,9 @@ void menuItem4() { // Function executes when you select the 4th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -384,9 +386,9 @@ void menuItem5() { // Function executes when you select the 5th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -408,9 +410,9 @@ void menuItem6() { // Function executes when you select the 6th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -432,9 +434,9 @@ void menuItem7() { // Function executes when you select the 7th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -456,9 +458,9 @@ void menuItem8() { // Function executes when you select the 8th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -480,9 +482,9 @@ void menuItem9() { // Function executes when you select the 9th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
@@ -504,13 +506,12 @@ void menuItem10() { // Function executes when you select the 10th item from main
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton();
+    button = evaluateButton(readKey);
     switch (button) {
-      case 4:  // This case will execute if the "back" button is pressed
+      case 4: // This case will execute if the "back" button is pressed
         button = 0;
         activeButton = 1;
         break;
     }
   }
 }
-

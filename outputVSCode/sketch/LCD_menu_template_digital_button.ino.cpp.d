@@ -17,5 +17,4 @@
  /home/sumarsono/Arduino/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.h \
  /home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/cores/arduino/Print.h \
  /home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/libraries/Wire/src/Wire.h \
- /home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/cores/arduino/Stream.h \
- /home/sumarsono/opt/arduino-1.8.4/libraries/LiquidCrystal/src/LiquidCrystal.h
+ /home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/cores/arduino/Stream.h

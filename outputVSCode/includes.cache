@@ -31,11 +31,6 @@
   },
   {
     "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
-    "Include": "LiquidCrystal.h",
-    "Includepath": "/home/sumarsono/opt/arduino-1.8.4/libraries/LiquidCrystal/src"
-  },
-  {
-    "Sourcefile": "/home/sumarsono/Arduino/LCD_menu_template_digital_button/outputVSCode/sketch/LCD_menu_template_digital_button.ino.cpp",
     "Include": "",
     "Includepath": ""
   },
@@ -61,11 +56,6 @@
   },
   {
     "Sourcefile": "/home/sumarsono/opt/arduino-1.8.4/hardware/arduino/avr/libraries/Wire/src/utility/twi.c",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "/home/sumarsono/opt/arduino-1.8.4/libraries/LiquidCrystal/src/LiquidCrystal.cpp",
     "Include": "",
     "Includepath": ""
   }

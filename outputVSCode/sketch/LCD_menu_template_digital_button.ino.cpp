@@ -4,13 +4,23 @@
 #include <RBD_Timer.h>
 #include <RBD_Button.h>
 #include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // You can have up to 10 menu items in the menuItems[] array below without having to change the base programming at all. Name them however you'd like. Beyond 10 items, you will have to add additional "cases" in the switch/case
 // section of the operateMainMenu() function below. You will also have to add additional void functions (i.e. menuItem11, menuItem12, etc.) to the program.
-String menuItems[] = {"ITEM 1", "ITEM 2", "ITEM 3", "ITEM 4", "ITEM 5", "ITEM 6"};
+String menuItems[] = {"Set Waktu", "Set Alarm", "ITEM 3", "ITEM 4", "ITEM 5", "ITEM 6"};
 
 // Navigation button variables
 int readKey;
+
+RBD::Button bawah(12);
+RBD::Button kanan(11);
+RBD::Button tengah(10);
+RBD::Button atas(9);
+RBD::Button kiri(8);
+
 
 // Menu control variables
 int menuPage = 0;
@@ -51,54 +61,50 @@ byte menuCursor[8] = {
   B00000  //
 };
 
-#include <Wire.h>
-#include <LiquidCrystal.h>
 
-// Setting the LCD shields pins
-LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
-
-#line 57 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 62 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void setup();
-#line 72 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 78 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void loop();
-#line 79 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 86 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void mainMenuDraw();
-#line 101 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 108 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void drawCursor();
-#line 132 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 139 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void operateMainMenu();
-#line 229 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
-int evaluateButton(int x);
-#line 246 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 250 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+int evaluateButton();
+#line 268 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void drawInstructions();
-#line 255 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 277 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem1();
-#line 279 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 301 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem2();
-#line 303 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 325 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem3();
-#line 327 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 349 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem4();
-#line 351 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 373 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem5();
-#line 375 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 397 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem6();
-#line 399 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 421 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem7();
-#line 423 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 445 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem8();
-#line 447 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 469 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem9();
-#line 471 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 493 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void menuItem10();
-#line 57 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
+#line 62 "/home/sumarsono/Arduino/LCD_menu_template_digital_button/LCD_menu_template_digital_button.ino"
 void setup() {
 
   // Initializes serial communication
   Serial.begin(9600);
 
   // Initializes and clears the LCD screen
-  lcd.begin(16, 2);
+  lcd.init();
+  lcd.backlight();
   lcd.clear();
 
   // Creates the byte for the 3 custom characters
@@ -113,7 +119,8 @@ void loop() {
   operateMainMenu();
 }
 
-// This function will generate the 2 menu items that can fit on the screen. They will change as you scroll through your menu. Up and down arrows will indicate your current menu position.
+// This function will generate the 2 menu items that can fit on the screen. 
+// They will change as you scroll through your menu. Up and down arrows will indicate your current menu position.
 void mainMenuDraw() {
   Serial.print(menuPage);
   lcd.clear();
@@ -171,12 +178,12 @@ void operateMainMenu() {
   int activeButton = 0;
   while (activeButton == 0) {
     int button;
-    readKey = analogRead(0);
-    if (readKey < 790) {
+    //readKey = analogRead(0);
+    if (tengah.isReleased()) {
       delay(100);
-      readKey = analogRead(0);
+      //readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 0: // When button returns as 0 there is no action taken
         break;
@@ -264,19 +271,34 @@ void operateMainMenu() {
 }
 
 // This function is called whenever a button press is evaluated. The LCD shield works by observing a voltage drop across the buttons all hooked up to A0.
-int evaluateButton(int x) {
-  int result = 0;
-  if (x < 50) {
-    result = 1; // right
-  } else if (x < 195) {
-    result = 2; // up
-  } else if (x < 380) {
+//int evaluateButton(int x) {
+//  int result = 0;
+//  if (x < 50) {
+//    result = 1; // right
+//   } else if (x < 195) {
+//    result = 2; // up
+//   } else if (x < 380) {
+//     result = 3; // down
+//   } else if (x < 790) {
+//     result = 4; // left
+//   }
+//   return result;
+// }
+
+int evaluateButton() {
+ int result = 0;
+ if (kanan.onPressed()) {
+   result = 1; // right
+  } else if (atas.onPressed()) {
+   result = 2; // up
+  } else if (bawah.onPressed()) {
     result = 3; // down
-  } else if (x < 790) {
+  } else if (kiri.onPressed()) {
     result = 4; // left
   }
   return result;
 }
+
 
 // If there are common usage instructions on more than 1 of your menu items you can call this function from the sub
 // menus to make things a little more simplified. If you don't have common instructions or verbage on multiple menus
@@ -304,7 +326,7 @@ void menuItem1() { // Function executes when you select the 1st item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -328,7 +350,7 @@ void menuItem2() { // Function executes when you select the 2nd item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -352,7 +374,7 @@ void menuItem3() { // Function executes when you select the 3rd item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -376,7 +398,7 @@ void menuItem4() { // Function executes when you select the 4th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -400,7 +422,7 @@ void menuItem5() { // Function executes when you select the 5th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -424,7 +446,7 @@ void menuItem6() { // Function executes when you select the 6th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -448,7 +470,7 @@ void menuItem7() { // Function executes when you select the 7th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -472,7 +494,7 @@ void menuItem8() { // Function executes when you select the 8th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -496,7 +518,7 @@ void menuItem9() { // Function executes when you select the 9th item from main m
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
@@ -520,7 +542,7 @@ void menuItem10() { // Function executes when you select the 10th item from main
       delay(100);
       readKey = analogRead(0);
     }
-    button = evaluateButton(readKey);
+    button = evaluateButton();
     switch (button) {
       case 4:  // This case will execute if the "back" button is pressed
         button = 0;
